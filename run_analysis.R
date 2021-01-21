@@ -80,4 +80,4 @@ names(Data) <- newname
 Data2 <- Data %>% 
   group_by(Subject, Activity) %>% 
   summarise_all(mean) %>% 
-  write.csv("tidydata.csv", row.names = FALSE)
+  write.table("tidydata.txt", row.names = FALSE)
