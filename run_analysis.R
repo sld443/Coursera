@@ -66,18 +66,16 @@ Data <- Data %>%
 # 6. Appropriately labels the data set with descriptive variable names
 
 newname <- names(Data) %>% 
-  str_replace_all("^t", "time") %>% 
-  str_replace_all("^f", "frequency") %>% 
-  str_replace_all("Acc", "Accelerometer") %>% 
-  str_replace_all("Gyro", "Gyroscope") %>% 
-  str_replace_all("Mag", "Magnitude") %>% 
-  str_replace_all("BodyBody", "Body")
+  str_replace_all("-mean", "Mean") %>% 
+  str_replace_all("-std", "Std") %>% 
+  str_replace_all("[-()]", "")
+
 
 names(Data) <- newname  
 
 # 7. Creates a second,independent tidy data set and ouput it
 
-Data2 <- Data %>% 
+Data %>% 
   group_by(Subject, Activity) %>% 
   summarise_all(mean) %>% 
   write.table("tidydata.txt", row.names = FALSE)
